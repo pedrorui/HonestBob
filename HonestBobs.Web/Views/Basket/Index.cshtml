@@ -1,0 +1,41 @@
+﻿@model HonestBobs.Domain.Basket
+
+@{
+    ViewBag.Title = "Your Basket";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+	@if (Model.Items.Any())
+	{
+		<h4>Items</h4>
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Unit Price</th>
+				<th>Quantity</th>
+				<th>Total</th>
+			</tr>
+			@foreach (var item in Model.Items) {
+				<tr>
+					<td>@Html.DisplayFor(modelItem => item.Product.Name)</td>
+					<td>@Html.DisplayFor(modelItem => item.Product.Description)</td>
+					<td>@Html.DisplayFor(modelItem => item.Product.UnitPrice)</td>
+					<td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+					<td>@Html.DisplayFor(modelItem => item.Total)</td>
+				</tr>
+			}
+		</table>
+		<div>
+			<hr/>
+			<h4>@Html.DisplayNameFor(model => model.Total): @Html.DisplayFor(model => model.Total)</h4>
+		</div>
+	}
+	else
+	{
+		<p>Your basket is currently empty.</p>
+	}
+</div>
+<p>@Html.ActionLink("Continue Shopping", "Index", "Home")</p>

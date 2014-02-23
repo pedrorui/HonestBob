@@ -1,0 +1,32 @@
+﻿@model IEnumerable<HonestBobs.Domain.Category>
+
+<div class="jumbotron">
+	<h3>Honest Bob's Awesome Emporium</h3>
+	<h4>Browse our products</h4>
+	@if (Model.Any())
+	{
+		<ul>
+			@foreach (var category in Model)
+			{
+				<li>@Html.ActionLink(category.Name, "Index", category.Name)</li>
+			}
+		</ul>
+	}
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Payment Info</h2>
+        <p>Payment info, or other...</p>
+		<p>@Html.ActionLink("Learn more", "Index", "Home")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Promotions</h2>
+	    <p>Promotional products...</p>
+        <p>@Html.ActionLink("View Promotions", "Index", "Home")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>New Arrivals</h2>
+        <p>New products for you...</p>
+		<p>@Html.ActionLink("View Products", "Index", "Home")</p>
+    </div>
+</div>
