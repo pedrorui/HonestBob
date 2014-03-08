@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HonestBobs.Web", "HonestBob
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HonestBobs.Persistence", "HonestBobs.Persistence\HonestBobs.Persistence.csproj", "{905E03C6-5C62-4B47-9D00-973995682A26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HonestBobs.Persistence.SqlServer", "HonestBobs.Persistence.SqlServer\HonestBobs.Persistence.SqlServer.csproj", "{CE604A19-AD48-4997-9A9C-49A3ADE99E6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HonestBobs.Persistence.SqLite", "HonestBobs.Persistence.SqLite\HonestBobs.Persistence.SqLite.csproj", "{5A89A09E-4A5E-4163-8676-9476AB4DBCA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{905E03C6-5C62-4B47-9D00-973995682A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{905E03C6-5C62-4B47-9D00-973995682A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{905E03C6-5C62-4B47-9D00-973995682A26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE604A19-AD48-4997-9A9C-49A3ADE99E6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE604A19-AD48-4997-9A9C-49A3ADE99E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE604A19-AD48-4997-9A9C-49A3ADE99E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE604A19-AD48-4997-9A9C-49A3ADE99E6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A89A09E-4A5E-4163-8676-9476AB4DBCA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A89A09E-4A5E-4163-8676-9476AB4DBCA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A89A09E-4A5E-4163-8676-9476AB4DBCA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A89A09E-4A5E-4163-8676-9476AB4DBCA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

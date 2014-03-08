@@ -196,6 +196,10 @@
       <Project>{9524a1f4-776a-4250-b5f0-ae91a348833a}</Project>
       <Name>HonestBobs.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HonestBobs.Persistence.SqLite\HonestBobs.Persistence.SqLite.csproj">
+      <Project>{5a89a09e-4a5e-4163-8676-9476ab4dbca6}</Project>
+      <Name>HonestBobs.Persistence.SqLite</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HonestBobs.Persistence\HonestBobs.Persistence.csproj">
       <Project>{905E03C6-5C62-4B47-9D00-973995682A26}</Project>
       <Name>HonestBobs.Persistence</Name>

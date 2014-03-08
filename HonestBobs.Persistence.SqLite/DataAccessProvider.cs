@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
-namespace HonestBobs.Persistence.Infrastructure
+namespace HonestBobs.Persistence.SqLite
 {
 	/// <summary>
-	/// An implementation of the <see cref="IDataAccessProvider"/> for Microsoft SQL Server.
+	/// The SqLite data Access Provider class
 	/// </summary>
-	public class SqlServerDataAccessProvider : IDataAccessProvider
+	public class DataAccessProvider : IDataAccessProvider
 	{
 		/// <summary>
 		/// The connection string
@@ -16,10 +16,10 @@ namespace HonestBobs.Persistence.Infrastructure
 		private readonly IDataAccessInitializer dataAccessInitializer;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="SqlServerDataAccessProvider" /> class.
+		/// Initializes a new instance of the <see cref="DataAccessProvider" /> class.
 		/// </summary>
 		/// <param name="dataAccessInitializer">The data access initializer.</param>
-		public SqlServerDataAccessProvider(IDataAccessInitializer dataAccessInitializer)
+		public DataAccessProvider(IDataAccessInitializer dataAccessInitializer)
 		{
 			this.dataAccessInitializer = dataAccessInitializer;
 		}
@@ -33,48 +33,48 @@ namespace HonestBobs.Persistence.Infrastructure
 		/// </returns>
 		public IDbCommand CreateCommand(string commandText)
 		{
-			return new SqlCommand(commandText);
+			return new SQLiteCommand(commandText);
 		}
 
 		/// <summary>
-		/// Retrive a list of objects from a query.
+		/// Returns the result of a command excution as an enumerable.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="command">The command.</param>
 		/// <param name="dataLoader">The data loader.</param>
-		/// <returns>
-		/// The list of results from the command execution.
-		/// </returns>
+		/// <returns></returns>
 		public IList<T> ReadEnumerable<T>(IDbCommand command, Func<IDataReader, T> dataLoader)
 		{
 			IList<T> items = new List<T>();
-			this.Read(command, reader =>
-			{
-				while (reader.Read())
+			this.Read(
+				command,
+				reader =>
 				{
-					items.Add(dataLoader(reader));
-				}
-			});
+					while (reader.Read())
+					{
+						items.Add(dataLoader(reader));
+					}
+				});
 			return items;
 		}
 
 		/// <summary>
-		/// Retrieve a single object from a query.
+		/// Returns a single item from the command result.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="command">The command.</param>
 		/// <param name="dataLoader">The data loader.</param>
-		/// <returns>
-		/// The item from the command execution.
-		/// </returns>
+		/// <returns></returns>
 		public T ReadSingle<T>(IDbCommand command, Func<IDataReader, T> dataLoader) where T : class, new()
 		{
-			var item = new T();
-			this.Read(command, reader =>
-			{
-				reader.Read();
-				item = dataLoader(reader);
-			});
+			T item = null;
+			this.Read(
+				command,
+				reader =>
+				{
+					reader.Read();
+					item = dataLoader(reader);
+				});
 
 			return item;
 		}
@@ -84,15 +84,15 @@ namespace HonestBobs.Persistence.Infrastructure
 		/// </summary>
 		/// <param name="command">The command.</param>
 		/// <param name="dataReader">The data reader.</param>
-		private void Read(IDbCommand command, Action<IDataReader> dataReader)
+		protected void Read(IDbCommand command, Action<IDataReader> dataReader)
 		{
-			using (var connection = new SqlConnection(this.dataAccessInitializer.ConnectionString))
+			using (var connection = new SQLiteConnection(this.dataAccessInitializer.ConnectionString))
 			{
 				using (command)
 				{
 					command.Connection = connection;
 					connection.Open();
-					using (var reader = command.ExecuteReader(CommandBehavior.CloseConnection))
+					using (IDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection))
 					{
 						dataReader(reader);
 						reader.Close();
