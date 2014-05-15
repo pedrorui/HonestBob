@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using HonestBobs.Business;
 using HonestBobs.Data;
 using HonestBobs.Persistence;
 using HonestBobs.Web.Infrastructure;
@@ -25,8 +26,10 @@ namespace HonestBobs.Web
 			builder.Register(dependency => new DataAccessInitializer()).As<IDataAccessInitializer>().InstancePerDependency();
 			builder.Register(dependency => new HttpCache()).As<ICache>().InstancePerDependency();
 
-			builder.RegisterDependenciesOf(typeof(IDataAccessProvider));
-			builder.RegisterDependenciesOf(typeof(IRepositoryLocator));
+            builder.RegisterImplementationsOf(typeof(IDataAccessProvider));
+            builder.RegisterImplementationsOf(typeof(IProductRepositoryLocator));
+            //builder.RegisterImplementationsOf("Repository");
+            builder.RegisterImplementationsOf(typeof(IReadRepository<,>));
 
 			IContainer container = builder.Build();
 
@@ -36,12 +39,32 @@ namespace HonestBobs.Web
 			configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 		}
 
-		private static void RegisterDependenciesOf(this ContainerBuilder containerBuilder, Type handlerType)
+		private static void RegisterImplementationsOf(this ContainerBuilder containerBuilder, Type handlerType)
 		{
+			var predicate = handlerType.IsGenericTypeDefinition
+				? new Func<Type, bool>(
+					type =>
+						type.GetInterfaces()
+							.Any(closedType => closedType.IsClosedTypeOf(handlerType)))
+				: new Func<Type, bool>(
+					type =>
+						type.GetInterfaces()
+							.Any(closedType => closedType.IsAssignableFrom(handlerType)));
+
 			containerBuilder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
-				.Where(type => type.GetInterfaces().Any(closedType => closedType.IsAssignableFrom(handlerType)))
+				.Where(predicate)
 				.AsImplementedInterfaces()
 				.InstancePerLifetimeScope();
 		}
+
+		/*
+		private static void RegisterImplementationsOf(this ContainerBuilder containerBuilder, string typePattern)
+        {
+            containerBuilder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
+                .Where(type => !type.IsAbstract && !type.IsInterface && type.IsClass && type.Name.EndsWith(typePattern, StringComparison.InvariantCultureIgnoreCase))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+        }
+		*/ 
 	}
 }

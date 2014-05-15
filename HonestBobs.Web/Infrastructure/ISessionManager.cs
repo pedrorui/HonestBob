@@ -14,9 +14,7 @@
 		/// </summary>
 		/// <typeparam name="T">The type of item to return.</typeparam>
 		/// <param name="key">The key.</param>
-		/// <returns>
-		/// The item.
-		/// </returns>
+		/// <returns>The item.</returns>
 		T GetItem<T>(string key) where T : new();
 
 		/// <summary>
@@ -24,9 +22,7 @@
 		/// </summary>
 		/// <typeparam name="T">The type of the item.</typeparam>
 		/// <param name="item">The item.</param>
-		/// <returns>
-		/// true if persisted, otherwise false.
-		/// </returns>
+		/// <returns>true if persisted, otherwise false.</returns>
 		bool PersistItem<T>(T item);
 
 		/// <summary>
@@ -35,9 +31,7 @@
 		/// <typeparam name="T">The type of the item.</typeparam>
 		/// <param name="item">The item.</param>
 		/// <param name="key">The key.</param>
-		/// <returns>
-		/// true if persisted, otherwise false.
-		/// </returns>
+		/// <returns>true if persisted, otherwise false.</returns>
 		bool PersistItem<T>(T item, string key);
 	}
 }

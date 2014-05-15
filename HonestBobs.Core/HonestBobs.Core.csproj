@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AC4C17D1-76DC-4C5A-840C-4BD2111CFFEC}</ProjectGuid>
+    <ProjectGuid>{8ED9D609-21C1-48AE-BACA-9D2E7A7AF55A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HonestBobs.Data</RootNamespace>
-    <AssemblyName>HonestBobs.Data</AssemblyName>
+    <RootNamespace>HonestBobs.Core</RootNamespace>
+    <AssemblyName>HonestBobs.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -34,19 +34,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBookRepository.cs" />
-    <Compile Include="ICategoryRepository.cs" />
-    <Compile Include="IMovieRepository.cs" />
-    <Compile Include="IProductRepository.cs" />
-    <Compile Include="IReadRepository.cs" />
-    <Compile Include="IWriteRepository.cs" />
+    <Compile Include="Guard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HonestBobs.Domain\HonestBobs.Domain.csproj">
-      <Project>{9524a1f4-776a-4250-b5f0-ae91a348833a}</Project>
-      <Name>HonestBobs.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

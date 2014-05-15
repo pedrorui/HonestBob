@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using HonestBobs.Data;
 using HonestBobs.Domain;
 
 namespace HonestBobs.Business
@@ -12,14 +11,14 @@ namespace HonestBobs.Business
 	{
 		private readonly IDictionary<string, Func<int, Product>> productJumpTable = new Dictionary<string, Func<int, Product>>();
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ProductLocatorService"/> class.
-		/// </summary>
-		/// <param name="repositoryLocator">The repository locator.</param>
-		public ProductLocatorService(IRepositoryLocator repositoryLocator)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProductLocatorService" /> class.
+        /// </summary>
+        /// <param name="productRepositoryLocator">The product locator.</param>
+		public ProductLocatorService(IProductRepositoryLocator productRepositoryLocator)
 		{
-			this.productJumpTable.Add(typeof(Book).Name, repositoryLocator.BookRepository.FetchById);
-			this.productJumpTable.Add(typeof(Movie).Name, repositoryLocator.MovieRepository.FetchById);
+			this.productJumpTable.Add(typeof(Book).Name, productRepositoryLocator.BookRepository.FetchById);
+			this.productJumpTable.Add(typeof(Movie).Name, productRepositoryLocator.MovieRepository.FetchById);
 		}
 
 		/// <summary>

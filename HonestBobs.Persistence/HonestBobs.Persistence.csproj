@@ -43,7 +43,6 @@
     <Compile Include="Infrastructure\DataExtensions.cs" />
     <Compile Include="MovieRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HonestBobs.Data\HonestBobs.Data.csproj">

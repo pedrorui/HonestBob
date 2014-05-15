@@ -2,18 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Caching;
 
 namespace HonestBobs.Web.Infrastructure
 {
 	/// <summary>
-	/// Implements cache using the native HttPRuntime cache.
+	/// Implements cache using the native HttpRuntime cache.
 	/// </summary>
 	public class HttpCache : ICache
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="HttpCache"/> class.
+		/// Initializes a new instance of the <see cref="HttpCache" /> class.
 		/// </summary>
 		public HttpCache()
 		{
@@ -23,9 +24,6 @@ namespace HonestBobs.Web.Infrastructure
 		/// <summary>
 		/// Gets or sets the cache absolute expiration interval in minutes.
 		/// </summary>
-		/// <value>
-		/// The absolute expiration interval.
-		/// </value>
 		public int AbsoluteExpirationMinutes { get; set; }
 
 		/// <summary>
@@ -33,10 +31,8 @@ namespace HonestBobs.Web.Infrastructure
 		/// </summary>
 		/// <typeparam name="T">The type of the method return.</typeparam>
 		/// <param name="function">The function.</param>
-		/// <param name="key">The key.</param>
-		/// <returns>
-		/// The function execution result.
-		/// </returns>
+		/// <param name="key">The key to identify the stored item.</param>
+		/// <returns>The function execution result.</returns>
 		public T Execute<T>(Func<T> function, string key)
 		{
 			object item = HttpRuntime.Cache[key];
@@ -49,6 +45,17 @@ namespace HonestBobs.Web.Infrastructure
 			this.Add(result, key);
 
 			return result;
+		}
+
+		/// <summary>
+		/// Executes the specified expression.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="expression">The expression.</param>
+		/// <returns></returns>
+		public T Execute<T>(Expression<Func<T>> expression)
+		{
+			return this.Execute(expression.Compile(), expression.ToString());
 		}
 
 		/// <summary>
@@ -67,7 +74,7 @@ namespace HonestBobs.Web.Infrastructure
 		{
 			IEnumerable<string> cacheKeysToRemove = HttpRuntime.Cache.Cast<DictionaryEntry>().Select(cacheItem => cacheItem.Key.ToString());
 
-			foreach (var cacheKey in cacheKeysToRemove)
+			foreach (string cacheKey in cacheKeysToRemove)
 			{
 				this.Remove(cacheKey);
 			}

@@ -3,7 +3,7 @@
 namespace HonestBobs.Web.Infrastructure
 {
 	/// <summary>
-	/// Stores and retieves items from the session.
+	/// Stores and retieves items from the http session.
 	/// </summary>
 	public class SessionManager : ISessionManager
 	{
@@ -22,10 +22,7 @@ namespace HonestBobs.Web.Infrastructure
 		/// Gets the item from the session, if the item cannot be found then create a new object instance.
 		/// </summary>
 		/// <typeparam name="T">The type of the item, also used as the session key.</typeparam>
-		/// <returns>
-		/// The item.
-		/// </returns>
-		/// <exception cref="System.NotImplementedException"></exception>
+		/// <returns>The item stored on the session.</returns>
 		public T GetItem<T>() where T : new()
 		{
 			return this.GetItem<T>(typeof(T).Name);
@@ -36,9 +33,7 @@ namespace HonestBobs.Web.Infrastructure
 		/// </summary>
 		/// <typeparam name="T">The type of item to return.</typeparam>
 		/// <param name="key">The key.</param>
-		/// <returns>
-		/// The item.
-		/// </returns>
+		/// <returns>The item stored on the session.</returns>
 		public T GetItem<T>(string key) where T : new()
 		{
 			if (this.session == null)
@@ -61,10 +56,7 @@ namespace HonestBobs.Web.Infrastructure
 		/// </summary>
 		/// <typeparam name="T">The type of the item.</typeparam>
 		/// <param name="item">The item.</param>
-		/// <returns>
-		/// true if persisted, otherwise false.
-		/// </returns>
-		/// <exception cref="System.NotImplementedException"></exception>
+		/// <returns>true if persisted, otherwise false.</returns>
 		public bool PersistItem<T>(T item)
 		{
 			return this.PersistItem(item, typeof(T).Name);
@@ -76,9 +68,7 @@ namespace HonestBobs.Web.Infrastructure
 		/// <typeparam name="T">The type of the item.</typeparam>
 		/// <param name="item">The item.</param>
 		/// <param name="key">The key.</param>
-		/// <returns>
-		/// true if persisted, otherwise false.
-		/// </returns>
+		/// <returns>true if persisted, otherwise false.</returns>
 		public bool PersistItem<T>(T item, string key)
 		{
 			if (this.session == null)
