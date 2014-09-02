@@ -24,7 +24,8 @@ namespace HonestBobs.Web
 
 			builder.Register(dependency => new SessionManager()).As<ISessionManager>().InstancePerDependency();
 			builder.Register(dependency => new DataAccessInitializer()).As<IDataAccessInitializer>().InstancePerDependency();
-			builder.Register(dependency => new HttpCache()).As<ICache>().InstancePerDependency();
+			//builder.Register(dependency => new HttpCache()).As<ICache>().InstancePerDependency();
+            builder.Register(dependency => new RedisCache("havok")).As<ICache>().SingleInstance();
 
             builder.RegisterImplementationsOf(typeof(IDataAccessProvider));
             builder.RegisterImplementationsOf(typeof(IProductRepositoryLocator));
