@@ -5,14 +5,23 @@ using System.Linq.Expressions;
 
 namespace HonestBobs.Web.Infrastructure
 {
+    /// <summary>
+    /// Implements cache using a redis client.
+    /// </summary>
     public class RedisCache : ICache, IDisposable
     {
         private readonly ICacheClient cacheClient;
-
+       
         public RedisCache(string hostName)
         {
             this.cacheClient = new RedisClient(hostName);
+            this.AbsoluteExpiration = new TimeSpan(0, 10, 0);
         }
+
+        /// <summary>
+        /// Gets or sets the cache absolute expiration interval.
+        /// </summary>
+        public TimeSpan AbsoluteExpiration { get; set; }
 
         public T Execute<T>(Func<T> function, string key)
         {
@@ -45,7 +54,8 @@ namespace HonestBobs.Web.Infrastructure
 
         private void Add<T>(T item, string key)
         {
-            this.cacheClient.Add(key, item);
+            var expiresAt = DateTime.Now.Add(this.AbsoluteExpiration);
+            this.cacheClient.Add(key, item, expiresAt);
         }
 
         public void Dispose()

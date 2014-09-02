@@ -18,13 +18,13 @@ namespace HonestBobs.Web.Infrastructure
 		/// </summary>
 		public HttpCache()
 		{
-			this.AbsoluteExpirationMinutes = 10;
+			this.AbsoluteExpiration = new TimeSpan(0, 10, 0);
 		}
 
 		/// <summary>
-		/// Gets or sets the cache absolute expiration interval in minutes.
+		/// Gets or sets the cache absolute expiration interval.
 		/// </summary>
-		public int AbsoluteExpirationMinutes { get; set; }
+		public TimeSpan AbsoluteExpiration { get; set; }
 
 		/// <summary>
 		/// Executes the specified function, caching the result.
@@ -88,7 +88,7 @@ namespace HonestBobs.Web.Infrastructure
 		/// <param name="key">The key.</param>
 		private void Add<T>(T item, string key)
 		{
-			HttpRuntime.Cache.Insert(key, item, null, DateTime.Now.AddMinutes(this.AbsoluteExpirationMinutes), Cache.NoSlidingExpiration);
+			HttpRuntime.Cache.Insert(key, item, null, DateTime.Now.AddMinutes(this.AbsoluteExpiration.Minutes), Cache.NoSlidingExpiration);
 		}
 	}
 }

@@ -10,6 +10,7 @@ using HonestBobs.Business;
 using HonestBobs.Data;
 using HonestBobs.Persistence;
 using HonestBobs.Web.Infrastructure;
+using System.Configuration;
 
 namespace HonestBobs.Web
 {
@@ -25,7 +26,7 @@ namespace HonestBobs.Web
 			builder.Register(dependency => new SessionManager()).As<ISessionManager>().InstancePerDependency();
 			builder.Register(dependency => new DataAccessInitializer()).As<IDataAccessInitializer>().InstancePerDependency();
 			//builder.Register(dependency => new HttpCache()).As<ICache>().InstancePerDependency();
-            builder.Register(dependency => new RedisCache("havok")).As<ICache>().SingleInstance();
+            builder.Register(dependency => new RedisCache(ConfigurationManager.AppSettings["Redis.ServerUrl"])).As<ICache>().SingleInstance();
 
             builder.RegisterImplementationsOf(typeof(IDataAccessProvider));
             builder.RegisterImplementationsOf(typeof(IProductRepositoryLocator));
