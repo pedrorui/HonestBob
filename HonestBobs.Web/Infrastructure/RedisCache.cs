@@ -11,6 +11,7 @@ namespace HonestBobs.Web.Infrastructure
     public class RedisCache : ICache, IDisposable
     {
         private readonly ICacheClient cacheClient;
+        private bool disposed = false;
        
         public RedisCache(string hostName)
         {
@@ -71,10 +72,17 @@ namespace HonestBobs.Web.Infrastructure
 
         protected virtual void Dispose(bool disposing)
         {
+            if (this.disposed)
+            {
+                return;
+            }
+
             if (disposing)
             {
-                this.cacheClient.Dispose();
+                this.cacheClient.Dispose();                
             }
+
+            this.disposed = true;
         }
     }
 }
