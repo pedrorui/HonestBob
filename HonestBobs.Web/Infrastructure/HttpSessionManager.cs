@@ -5,14 +5,14 @@ namespace HonestBobs.Web.Infrastructure
 	/// <summary>
 	/// Stores and retieves items from the http session.
 	/// </summary>
-	public class SessionManager : ISessionManager
+	public class HttpSessionManager : ISessionManager
 	{
 		private readonly HttpSessionStateBase session;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="SessionManager" /> class.
+		/// Initializes a new instance of the <see cref="HttpSessionManager" /> class.
 		/// </summary>
-		public SessionManager()
+		public HttpSessionManager()
 		{
 			var context = new HttpContextWrapper(HttpContext.Current);
 			this.session = context.Session;

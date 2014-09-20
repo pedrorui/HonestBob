@@ -23,7 +23,7 @@ namespace HonestBobs.Web
 			builder.RegisterControllers(assembly);
 			builder.RegisterApiControllers(assembly);
 
-			builder.Register(dependency => new SessionManager()).As<ISessionManager>().InstancePerDependency();
+			builder.Register(dependency => new HttpSessionManager()).As<ISessionManager>().InstancePerDependency();
 			builder.Register(dependency => new DataAccessInitializer()).As<IDataAccessInitializer>().InstancePerDependency();
 			//builder.Register(dependency => new HttpCache()).As<ICache>().InstancePerDependency();
             builder.Register(dependency => new RedisCache(ConfigurationManager.AppSettings["Redis.ServerUrl"])).As<ICache>().SingleInstance();

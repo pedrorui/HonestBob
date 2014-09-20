@@ -17,7 +17,7 @@ namespace HonestBobs.Web.Controllers
 		private readonly ISessionManager sessionManager;
 
 		/// <summary>
-		///     Initializes a new instance of the <see cref="BasketServiceController" /> class.
+		/// Initializes a new instance of the <see cref="BasketServiceController" /> class.
 		/// </summary>
 		/// <param name="productRepositoryLocator">The repository locator.</param>
 		/// <param name="sessionManager">The session manager.</param>
