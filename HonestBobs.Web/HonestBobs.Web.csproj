@@ -165,7 +165,7 @@
     <Compile Include="Infrastructure\ISessionManager.cs" />
     <Compile Include="Infrastructure\ProductRepositoryLocator.cs" />
     <Compile Include="Infrastructure\RedisCache.cs" />
-    <Compile Include="Infrastructure\SessionManager.cs" />
+    <Compile Include="Infrastructure\HttpSessionManager.cs" />
     <Compile Include="Models\AddToBasketRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
