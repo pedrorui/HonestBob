@@ -16,7 +16,7 @@ namespace HonestBobs.Business
 		{
 			if (this.Basket == null)
 			{
-				this.Basket = new Basket { Items = new List<BasketItem>() };
+				this.Basket = new Basket();
 			}
 		}
 

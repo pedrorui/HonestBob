@@ -8,13 +8,18 @@ namespace HonestBobs.Domain
 	/// </summary>
 	public class Basket
 	{
+        public Basket()
+        {
+            this.Items = new LinkedList<BasketItem>();
+        }
+
 		/// <summary>
 		/// Gets or sets the basket items.
 		/// </summary>
 		/// <value>
 		/// The items.
 		/// </value>
-		public IList<BasketItem> Items { get; set; }
+		public ICollection<BasketItem> Items { get; private set; }
 
 		/// <summary>
 		/// Gets the total of the basket.

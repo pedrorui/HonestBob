@@ -25,7 +25,7 @@ namespace HonestBobs.Web.Infrastructure
 		/// <returns>The item stored on the session.</returns>
 		public T GetItem<T>() where T : new()
 		{
-			return this.GetItem<T>(typeof(T).Name);
+			return this.GetItem<T>(this.GenerateKey<T>());
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace HonestBobs.Web.Infrastructure
 
 			if (item != null)
 			{
-				return (T) item;
+				return (T)item;
 			}
 
 			return new T();
@@ -59,7 +59,7 @@ namespace HonestBobs.Web.Infrastructure
 		/// <returns>true if persisted, otherwise false.</returns>
 		public bool PersistItem<T>(T item)
 		{
-			return this.PersistItem(item, typeof(T).Name);
+			return this.PersistItem(item, this.GenerateKey<T>());
 		}
 
 		/// <summary>
@@ -79,5 +79,10 @@ namespace HonestBobs.Web.Infrastructure
 			this.session[key] = item;
 			return true;
 		}
+
+        private string GenerateKey<T>()
+        {
+            return typeof(T).FullName;
+        }
 	}
 }

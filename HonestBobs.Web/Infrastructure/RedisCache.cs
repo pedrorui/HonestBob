@@ -56,7 +56,7 @@ namespace HonestBobs.Web.Infrastructure
         private void Add<T>(T item, string key)
         {
             var expiresAt = DateTime.Now.Add(this.AbsoluteExpiration);
-            this.cacheClient.Add(key, item, expiresAt);
+            this.cacheClient.Set(key, item, expiresAt);
         }
 
         public void Dispose()

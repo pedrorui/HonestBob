@@ -24,9 +24,9 @@ namespace HonestBobs.Web
 			builder.RegisterApiControllers(assembly);
 
 			builder.Register(dependency => new HttpSessionManager()).As<ISessionManager>().InstancePerDependency();
-			builder.Register(dependency => new DataAccessInitializer()).As<IDataAccessInitializer>().InstancePerDependency();
-			//builder.Register(dependency => new HttpCache()).As<ICache>().InstancePerDependency();
-            builder.Register(dependency => new RedisCache(ConfigurationManager.AppSettings["Redis.ServerUrl"])).As<ICache>().SingleInstance();
+			builder.Register(dependency => new DataAccessInitializer()).As<IDataAccessInitializer>().SingleInstance();
+			builder.Register(dependency => new HttpCache()).As<ICache>().SingleInstance();
+            //builder.Register(dependency => new RedisCache(ConfigurationManager.AppSettings["Redis.ServerUrl"])).As<ICache>().SingleInstance();
 
             builder.RegisterImplementationsOf(typeof(IDataAccessProvider));
             builder.RegisterImplementationsOf(typeof(IProductRepositoryLocator));
