@@ -10,7 +10,6 @@ using HonestBobs.Business;
 using HonestBobs.Data;
 using HonestBobs.Persistence;
 using HonestBobs.Web.Infrastructure;
-using System.Configuration;
 
 namespace HonestBobs.Web
 {
