@@ -29,8 +29,9 @@ namespace HonestBobs.Web
 
             builder.RegisterImplementationsOf(typeof(IDataAccessProvider));
             builder.RegisterImplementationsOf(typeof(IProductRepositoryLocator));
-            //builder.RegisterImplementationsOf("Repository");
             builder.RegisterImplementationsOf(typeof(IReadRepository<,>));
+
+            builder.RegisterType<ProductLocatorService>();
 
 			IContainer container = builder.Build();
 
@@ -57,15 +58,5 @@ namespace HonestBobs.Web
 				.AsImplementedInterfaces()
 				.InstancePerLifetimeScope();
 		}
-
-		/*
-		private static void RegisterImplementationsOf(this ContainerBuilder containerBuilder, string typePattern)
-        {
-            containerBuilder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
-                .Where(type => !type.IsAbstract && !type.IsInterface && type.IsClass && type.Name.EndsWith(typePattern, StringComparison.InvariantCultureIgnoreCase))
-                .AsImplementedInterfaces()
-                .InstancePerLifetimeScope();
-        }
-		*/ 
 	}
 }

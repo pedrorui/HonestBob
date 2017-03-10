@@ -10,7 +10,6 @@ namespace HonestBobs.Web.Infrastructure
 	public class ProductRepositoryLocator : IProductRepositoryLocator
 	{
 		private readonly IBookRepository bookRepository;
-
 		private readonly IMovieRepository movieRepository;
 
 		/// <summary>

@@ -34,7 +34,6 @@ namespace HonestBobs.Web.Controllers
 		{
 			this.ViewBag.Title = "Home Page";
 
-			//IEnumerable<Category> categories = this.cache.Execute(() => this.categoryRepository.FetchAll(), CacheKey);
 			IEnumerable<Category> categories = this.cache.Execute(() => this.categoryRepository.FetchAll());
 			return this.View(categories);
 		}
