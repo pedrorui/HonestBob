@@ -25,7 +25,6 @@ namespace HonestBobs.Web
 			builder.Register(dependency => new HttpSessionManager()).As<ISessionManager>().InstancePerDependency();
 			builder.Register(dependency => new DataAccessInitializer()).As<IDataAccessInitializer>().SingleInstance();
 			builder.Register(dependency => new HttpCache()).As<ICache>().SingleInstance();
-            //builder.Register(dependency => new RedisCache(ConfigurationManager.AppSettings["Redis.ServerUrl"])).As<ICache>().SingleInstance();
 
             builder.RegisterImplementationsOf(typeof(IDataAccessProvider));
             builder.RegisterImplementationsOf(typeof(IProductRepositoryLocator));
@@ -33,7 +32,10 @@ namespace HonestBobs.Web
 
             builder.RegisterType<ProductLocatorService>();
 
-			IContainer container = builder.Build();
+            //builder.RegisterType<RedisCacheConfiguration>().SingleInstance();
+            //builder.RegisterType<RedisCache>().As<ICache>().SingleInstance();
+
+            IContainer container = builder.Build();
 
 			//For MVC
 			DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -13,10 +13,10 @@ namespace HonestBobs.Web.Infrastructure
         private readonly ICacheClient cacheClient;
         private bool disposed = false;
        
-        public RedisCache(string hostName)
+        public RedisCache(RedisCacheConfiguration configuration)
         {
-            this.cacheClient = new RedisClient(hostName);
-            this.AbsoluteExpiration = new TimeSpan(0, 10, 0);
+            this.cacheClient = new RedisClient(configuration.HostName);
+            this.AbsoluteExpiration = configuration.TimeToLive;
         }
 
         /// <summary>

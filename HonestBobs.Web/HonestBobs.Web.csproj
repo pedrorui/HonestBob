@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -171,6 +172,7 @@
     <Compile Include="Infrastructure\ProductRepositoryLocator.cs" />
     <Compile Include="Infrastructure\RedisCache.cs" />
     <Compile Include="Infrastructure\HttpSessionManager.cs" />
+    <Compile Include="Infrastructure\RedisCacheConfiguration.cs" />
     <Compile Include="Models\AddToBasketRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
