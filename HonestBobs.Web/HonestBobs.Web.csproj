@@ -167,6 +167,7 @@
     </Compile>
     <Compile Include="Infrastructure\DataAccessInitializer.cs" />
     <Compile Include="Infrastructure\HttpCache.cs" />
+    <Compile Include="Infrastructure\HttpCacheConfiguration.cs" />
     <Compile Include="Infrastructure\ICache.cs" />
     <Compile Include="Infrastructure\ISessionManager.cs" />
     <Compile Include="Infrastructure\ProductRepositoryLocator.cs" />

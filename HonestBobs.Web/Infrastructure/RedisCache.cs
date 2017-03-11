@@ -11,18 +11,15 @@ namespace HonestBobs.Web.Infrastructure
     public class RedisCache : ICache, IDisposable
     {
         private readonly ICacheClient cacheClient;
+
         private bool disposed = false;
+        private TimeSpan absoluteExpiration;
        
         public RedisCache(RedisCacheConfiguration configuration)
         {
             this.cacheClient = new RedisClient(configuration.HostName);
-            this.AbsoluteExpiration = configuration.TimeToLive;
+            this.absoluteExpiration = configuration.TimeToLive;
         }
-
-        /// <summary>
-        /// Gets or sets the cache absolute expiration interval.
-        /// </summary>
-        public TimeSpan AbsoluteExpiration { get; set; }
 
         public T Execute<T>(Func<T> function, string key)
         {
@@ -55,7 +52,7 @@ namespace HonestBobs.Web.Infrastructure
 
         private void Add<T>(T item, string key)
         {
-            var expiresAt = DateTime.Now.Add(this.AbsoluteExpiration);
+            var expiresAt = DateTime.Now.Add(this.absoluteExpiration);
             this.cacheClient.Set(key, item, expiresAt);
         }
 
